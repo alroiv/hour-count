@@ -4,24 +4,31 @@
     <title>Calcular Diferencia</title>
     <script src="index.js" ></script>
     <style type="text/css">
-    h1{
-        color: #00f;
-        font-family: sans-serif;
-        font-size: 26px;
-        text-align: center;
-    }
-    body{
-        background-color: #ccc;
-    }
-</style>
+        .input, .calc-button{
+            border-radius: 3px;
+
+        }
+        .button{
+            margin-top: 0.75em;
+            padding: 3px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Calcular Diferencia Entre Tiempos</h1>
+    <h1>Hour Count</h1>
     <div class="container">
-        <input id="hora_minuto_inicio" type="text" onchange="formatTime" placeholder="12:00"/>
-        <input id="hora_minuto_final" type="text" onchange="formatTime" placeholder="13:30"/>
-        <input type="button" onclick="calcularDiferencia()" value="Calcular">
-        <span id="diferencia"></span>
+        <div id="hour-calc-container">
+            <span>Diferencia Total: <span id="diferencia_total"></span></span>
+            <div class="hour-calc">
+                <input id="hora_minuto_inicio_1" class="input" type="time" placeholder="12:00"/>
+                <input id="hora_minuto_final_1" class="input" type="time" placeholder="13:30"/>
+                <input class="button" type="button" onclick="calcularDiferencia(1)" value="Calcular">
+                <span class="diferencia" id="diferencia_1"></span>
+            </div>
+        </div>
+
+        <input type="button" class="button" onclick="add_hour_calc()" value="+">
+
     </div>
 
 
