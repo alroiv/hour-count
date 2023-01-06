@@ -12,8 +12,8 @@ function calcular_diferencia_total(){
 
           let hours1 = parseInt(tiempo_total.split(':')[0]);
           let minutes1 = parseInt(tiempo_total.split(':')[1]);
-          let hours2 = parseInt(diferencia.split(':')[0]);
-          let minutes2 = parseInt(diferencia.split(':')[1]);
+          let hours2 = parseInt(diferencia.textContent.split(':')[0]);
+          let minutes2 = parseInt(diferencia.textContent.split(':')[1]);
 
           // Sumar las horas y los minutos por separado
           let hours = hours1 + hours2;
@@ -59,10 +59,11 @@ function add_hour_calc(){
     container = document.getElementById("hour-calc-container")
     let div = document.createElement('div')
     div.className= "hour-calc"
-     element = `<button>Delete</button><input id="hora_minuto_inicio_1" type="time"  placeholder="12:00"/>
+     element = `<input class="button delete" type="button" onclick="delete_hour_calc(event)" value="delete">
+    <input id="hora_minuto_inicio_1" type="time"  placeholder="12:00"/>
     <input id="hora_minuto_final_1" type="time"  placeholder="13:30"/>
     <input class="button" type="button" onclick="calcularDiferencia(1)" value="Calcular">
-    <span id="diferencia_1"></span>`
+    <span id="diferencia_1" class="diferencia"></span>`
     element = element.replace('hora_minuto_inicio_1', 'hora_minuto_inicio_'+number_of_hour_calc)
     element = element.replace('hora_minuto_final_1', 'hora_minuto_final_'+number_of_hour_calc)
     element = element.replace('calcularDiferencia(1)', 'calcularDiferencia('+number_of_hour_calc+')')
@@ -71,6 +72,7 @@ function add_hour_calc(){
     container.appendChild(div)
 }
 
-function delete_hour_calc(){
-
+function delete_hour_calc(event){
+    event.target.parentElement.remove()
+    calcular_diferencia_total()
 }
