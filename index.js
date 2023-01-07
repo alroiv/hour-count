@@ -9,29 +9,30 @@ function calcular_diferencia_total(){
     diferencies = document.getElementsByClassName("diferencia")
     tiempo_total = "0:0"
     for (diferencia of diferencies){
+          if (diferencia.textContent && diferencia.textContent != "NaN:NaN"){
+              let hours1 = parseInt(tiempo_total.split(':')[0]);
+              let minutes1 = parseInt(tiempo_total.split(':')[1]);
+              let hours2 = parseInt(diferencia.textContent.split(':')[0]);
+              let minutes2 = parseInt(diferencia.textContent.split(':')[1]);
 
-          let hours1 = parseInt(tiempo_total.split(':')[0]);
-          let minutes1 = parseInt(tiempo_total.split(':')[1]);
-          let hours2 = parseInt(diferencia.textContent.split(':')[0]);
-          let minutes2 = parseInt(diferencia.textContent.split(':')[1]);
+              // Sumar las horas y los minutos por separado
+              let hours = hours1 + hours2;
+              let minutes = minutes1 + minutes2;
 
-          // Sumar las horas y los minutos por separado
-          let hours = hours1 + hours2;
-          let minutes = minutes1 + minutes2;
+              // Si hay más de 60 minutos, aumentar la cantidad de horas en 1 y restar 60 minutos
+              if (minutes >= 60) {
+                hours += 1;
+                minutes -= 60;
+              }
 
-          // Si hay más de 60 minutos, aumentar la cantidad de horas en 1 y restar 60 minutos
-          if (minutes >= 60) {
-            hours += 1;
-            minutes -= 60;
+              // Si hay menos de 10 minutos, agregar un 0 a la izquierda
+              if (minutes < 10) {
+                minutes = '0' + minutes;
+              }
+
+              // Devolver el resultado en el formato HH:MM
+              tiempo_total =  hours + ':' + minutes;
           }
-
-          // Si hay menos de 10 minutos, agregar un 0 a la izquierda
-          if (minutes < 10) {
-            minutes = '0' + minutes;
-          }
-
-          // Devolver el resultado en el formato HH:MM
-          tiempo_total =  hours + ':' + minutes;
     }
     document.getElementById("diferencia_total").textContent = tiempo_total
 }
@@ -40,18 +41,20 @@ function calcular_diferencia_total(){
 function calcularDiferencia(id_num) {
          hora_minuto_inicio = document.getElementById("hora_minuto_inicio_"+id_num).value
          hora_minuto_final = document.getElementById("hora_minuto_final_"+id_num).value
-         //Se separan las horas y los minutos
-         let horas1 = hora_minuto_inicio.split(':')[0];
-         let minutos1 = hora_minuto_inicio.split(':')[1];
-         let horas2 = hora_minuto_final.split(':')[0];
-         let minutos2 = hora_minuto_final.split(':')[1];
-         //Se calcula la diferencia entre los tiempos
-         diferencia = (horas2 - horas1) * 60 + (minutos2 - minutos1);
-         //Se calcula el tiempo total en horas y minutos
-         let tiempo = Math.floor(diferencia / 60) + ':' + (diferencia % 60);
-         //Se devuelve el tiempo
-         document.getElementById("diferencia_"+id_num).textContent = tiempo
-         calcular_diferencia_total()
+         if (hora_minuto_inicio && hora_minuto_final){
+             //Se separan las horas y los minutos
+             let horas1 = hora_minuto_inicio.split(':')[0];
+             let minutos1 = hora_minuto_inicio.split(':')[1];
+             let horas2 = hora_minuto_final.split(':')[0];
+             let minutos2 = hora_minuto_final.split(':')[1];
+             //Se calcula la diferencia entre los tiempos
+             diferencia = (horas2 - horas1) * 60 + (minutos2 - minutos1);
+             //Se calcula el tiempo total en horas y minutos
+             let tiempo = Math.floor(diferencia / 60) + ':' + (diferencia % 60);
+             //Se devuelve el tiempo
+             document.getElementById("diferencia_"+id_num).textContent = tiempo
+             calcular_diferencia_total()
+         }
     }
 
 function add_hour_calc(){
