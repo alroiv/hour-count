@@ -54,21 +54,33 @@ function calcularDiferencia(id_num) {
              //Se devuelve el tiempo
              document.getElementById("diferencia_"+id_num).textContent = tiempo
              calcular_diferencia_total()
+             inputs_buits = hi_ha_inputs_buits()
+             if (!inputs_buits){
+                add_hour_calc()
+             }
          }
     }
-
+function hi_ha_inputs_buits(){
+    inputs = document.getElementsByClassName("input")
+    for (input of inputs){
+        if (!input.value){
+            return true
+        }
+    }
+    return false
+}
 function add_hour_calc(){
     number_of_hour_calc++
     container = document.getElementById("hour-calc-container")
     let div = document.createElement('div')
     div.className= "hour-calc"
      element = `<input class="button delete" type="button" onclick="delete_hour_calc(event)" value="delete">
-    <input id="hora_minuto_inicio_1" type="time"  placeholder="12:00"/>
-    <input id="hora_minuto_final_1" type="time"  placeholder="13:30"/>
-    <input class="button" type="button" onclick="calcularDiferencia(1)" value="Calcular">
+    <input id="hora_minuto_inicio_1" class="input" onkeyup="calcularDiferencia(1)" type="time"  placeholder="12:00"/>
+    <input id="hora_minuto_final_1" class="input" onkeyup="calcularDiferencia(1)" type="time"  placeholder="13:30"/>
     <span id="diferencia_1" class="diferencia"></span>`
     element = element.replace('hora_minuto_inicio_1', 'hora_minuto_inicio_'+number_of_hour_calc)
     element = element.replace('hora_minuto_final_1', 'hora_minuto_final_'+number_of_hour_calc)
+    element = element.replace('calcularDiferencia(1)', 'calcularDiferencia('+number_of_hour_calc+')')
     element = element.replace('calcularDiferencia(1)', 'calcularDiferencia('+number_of_hour_calc+')')
     element = element.replace('diferencia_1', 'diferencia_'+number_of_hour_calc)
     div.innerHTML = element
@@ -78,4 +90,8 @@ function add_hour_calc(){
 function delete_hour_calc(event){
     event.target.parentElement.remove()
     calcular_diferencia_total()
+}
+
+function reset(){
+document.location.reload()
 }
