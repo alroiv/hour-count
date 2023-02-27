@@ -20,15 +20,14 @@
         <div id="hour-calc-container">
             <span>Diferencia Total: <span id="diferencia_total"></span></span>
             <div class="hour-calc">
-                <input id="hora_minuto_inicio_1" class="input" type="time" placeholder="12:00"/>
-                <input id="hora_minuto_final_1" class="input" type="time" placeholder="13:30"/>
-                <input class="button" type="button" onclick="calcularDiferencia(1)" value="Calcular">
+                <input id="hora_minuto_inicio_1" class="input" onkeyup="calcularDiferencia(1)" type="time" placeholder="12:00"/>
+                <input id="hora_minuto_final_1" class="input" onkeyup="calcularDiferencia(1)" type="time" placeholder="13:30"/>
                 <span class="diferencia" id="diferencia_1"></span>
             </div>
         </div>
 
         <input type="button" class="button" onclick="add_hour_calc()" value="+">
-
+        <input type="button" class="button" onclick="reset()" value="Clear">
     </div>
 
 
